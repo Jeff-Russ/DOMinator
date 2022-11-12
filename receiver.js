@@ -18,27 +18,27 @@ target.dispatchEvent = target.dispatchEvent.bind(target);
 
 // Add the 'manipulate' listener to the target.
 target.addEventListener("manipulate", function(e) {
-    let head = document.head;
-    let script = document.createElement("script");
-    script.textContent = e.detail.code;
-    head.appendChild(script);
-    added_js.push([e.detail.filename, script]);
-    return true;
+	let head = document.head;
+	let script = document.createElement("script");
+	script.textContent = e.detail.code;
+	head.appendChild(script);
+	added_js.push([e.detail.filename, script]);
+	return true;
 });
 
 // Add the 'remove-manipulation' listener to the target.
 target.addEventListener("remove-manipulation", function(e) {
-    for(let element of added_js)
-    {
-        if(element[0] === e.detail.filename)
-        {
-            let index = added_js.indexOf(element);
-            element[1].remove();
-            added_js.splice(index, 1);
-            break;
-        }
-    }
-    return true;
+	for(let element of added_js)
+	{
+		if(element[0] === e.detail.filename)
+		{
+			let index = added_js.indexOf(element);
+			element[1].remove();
+			added_js.splice(index, 1);
+			break;
+		}
+	}
+	return true;
 });
 
 // Add the target to the DOM.
